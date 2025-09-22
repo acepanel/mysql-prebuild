@@ -15,6 +15,7 @@ git clone --depth 1 --branch "Percona-Server-${version}" https://github.com/perc
 # 编译
 chmod -R 700 src
 cd src
+git submodule update
 mkdir dist
 cd dist
 
