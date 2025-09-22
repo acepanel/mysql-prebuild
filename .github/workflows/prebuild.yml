@@ -1,4 +1,4 @@
-name: Build MySQL Prebuilt Packages
+name: MySQL Prebuilt Packages
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    name: Build ${{ matrix.mysql.version }} on ${{ matrix.os.name }} ${{ matrix.os.version }}
+    name: ${{ matrix.mysql.version }} - ${{ matrix.os.name }} ${{ matrix.os.version }} (${{ matrix.on }})
     runs-on: ${{ matrix.on }}
     strategy:
       fail-fast: false

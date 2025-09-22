@@ -12,7 +12,7 @@ mkdir -p ${mysql_path}
 cd ${mysql_path}
 
 # 下载源码
-git clone --depth 1 --branch "${version}" https://github.com/percona/percona-server.git src
+git clone --depth 1 --branch "Percona-Server-${version}" https://github.com/percona/percona-server.git src
 
 # 编译
 cd src
