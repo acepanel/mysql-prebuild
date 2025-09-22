@@ -73,5 +73,4 @@ rm -rf ${mysql_path}/bin/mysql_client_test*
 rm -rf ${mysql_path}/bin/mysqltest*
 rm -rf ${mysql_path}/bin/mysql_embedded
 
-
 echo "Installation successful"

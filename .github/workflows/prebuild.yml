@@ -22,15 +22,12 @@ jobs:
           - { channel: "percona_84", version: "8.4.6-6" }
         os:
           # Debian
-          - { name: "debian", version: "11", image: "debian:11" }
           - { name: "debian", version: "12", image: "debian:12" }
           - { name: "debian", version: "13", image: "debian:13" }
           # Ubuntu
-          - { name: "ubuntu", version: "20", image: "ubuntu:20.04" }
           - { name: "ubuntu", version: "22", image: "ubuntu:22.04" }
           - { name: "ubuntu", version: "24", image: "ubuntu:24.04" }
           # AlmaLinux
-          - { name: "almalinux", version: "8", image: "almalinux:8" }
           - { name: "almalinux", version: "9", image: "almalinux:9" }
           - { name: "almalinux", version: "10", image: "almalinux:10" }
     container:
