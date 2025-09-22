@@ -9,12 +9,12 @@ on:
 
 jobs:
   build:
-    name: ${{ matrix.mysql.version }} - ${{ matrix.os.name }} ${{ matrix.os.version }} (${{ matrix.on }})
-    runs-on: ${{ matrix.on }}
+    name: ${{ matrix.mysql.version }}${{ matrix.on }} ${{ matrix.os.name }} ${{ matrix.os.version }}
+    runs-on: ubuntu-24.04${{ matrix.on }}
     strategy:
       fail-fast: false
       matrix:
-        on: [ "ubuntu-24.04", "ubuntu-24.04-arm" ]
+        on: [ "", "-arm" ]
         mysql:
           - { channel: "percona_57", version: "5.7.44-53" }
           - { channel: "percona_80", version: "8.0.43-34" }
