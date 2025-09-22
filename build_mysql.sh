@@ -10,11 +10,11 @@ mkdir -p ${mysql_path}
 cd ${mysql_path}
 
 # 下载源码
-git clone --depth 1 --branch "Percona-Server-${version}" https://github.com/percona/percona-server.git src
+git clone --depth 1 --branch "Percona-Server-8.4.6-6" https://github.com/percona/percona-server.git src
 
 # 编译
-chmod -R 700 src
 cd src
+git submodule init
 git submodule update
 mkdir dist
 cd dist
