@@ -65,14 +65,13 @@ if [ "$?" != "0" ]; then
     exit 1
 fi
 
-# 打包
+# 清理
 cd ${mysql_path}
 rm -rf src
-7z a -mx=9 "percona-server-${version}.7z" *
-if [ "$?" != "0" ]; then
-    rm -rf ${mysql_path}
-    echo "Packaging failed"
-    exit 1
-fi
+rm -rf ${mysql_path}/lib/*.a
+rm -rf ${mysql_path}/bin/mysql_client_test*
+rm -rf ${mysql_path}/bin/mysqltest*
+rm -rf ${mysql_path}/bin/mysql_embedded
+
 
 echo "Installation successful"
