@@ -87,15 +87,3 @@ jobs:
           name: ${{ steps.package.outputs.name }}
           path: /opt/ace/server/mysql
           retention-days: 90
-      - name: Generate build summary
-        run: |
-          echo "## Build Summary" >> $GITHUB_STEP_SUMMARY
-          echo "- **OS**: ${{ matrix.os.name }} ${{ matrix.os.version }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **MySQL Channel**: ${{ matrix.mysql.channel }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **MySQL Version**: ${{ matrix.mysql.version }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Package**: ${{ steps.package.outputs.file }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Architecture**: $(uname -m)" >> $GITHUB_STEP_SUMMARY
-          if [ -f "${{ steps.package.outputs.file }}" ]; then
-            SIZE=$(du -h "${{ steps.package.outputs.file }}" | cut -f1)
-            echo "- **Package Size**: ${SIZE}" >> $GITHUB_STEP_SUMMARY
-          fi
