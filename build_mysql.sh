@@ -1,6 +1,5 @@
 #!/bin/bash
 
-arch=$(uname -m)
 channel=${1}
 version=${2}
 mysql_path="/opt/ace/server/mysql"
@@ -17,11 +16,6 @@ git clone --depth 1 --branch "Percona-Server-${version}" https://github.com/perc
 cd src
 git submodule init
 git submodule update
-
-# arm64 打补丁
-if [[ ${arch} == "aarch64" ]]; then
-    sed -i '/#include <sys\/prctl.h>/a #include <unistd.h>' extra/coredumper/src/thread_lister.c
-fi
 
 # 编译
 mkdir dist
