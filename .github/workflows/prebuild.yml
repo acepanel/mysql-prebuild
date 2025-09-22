@@ -1,15 +1,16 @@
 name: MySQL Prebuilt Packages
-
 on:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
   workflow_dispatch:
-
+concurrency:
+  group: ${{ github.event.workflow_run.head_repository.full_name }}::${{ github.event.workflow_run.head_branch }}::${{ github.workflow }}
+  cancel-in-progress: true
 jobs:
   build:
-    name: ${{ matrix.mysql.version }}${{ matrix.on }} ${{ matrix.os.name }} ${{ matrix.os.version }}
+    name: ${{ matrix.mysql.version }}${{ matrix.on }} on ${{ matrix.os.name }} ${{ matrix.os.version }}
     runs-on: ubuntu-24.04${{ matrix.on }}
     strategy:
       fail-fast: false
