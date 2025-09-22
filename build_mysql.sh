@@ -73,7 +73,10 @@ rm -rf ${mysql_path}/bin/mysql_embedded
 
 # 精简压缩
 strip -s ${mysql_path}/bin/*
-upx --best --lzma ${mysql_path}/bin/*
+wget -c https://github.com/upx/upx/releases/download/v5.0.2/upx-5.0.2-amd64_linux.tar.xz -O - | tar xJf -
+mv upx-5.0.2-amd64_linux upx
+chmod +x upx/upx
+./upx/upx --best --lzma ${mysql_path}/bin/*
 
 echo "Build successful"
 exit 0
