@@ -47,6 +47,10 @@ jobs:
             if [ "${{ matrix.os.name }}" = "debian" ] && [ "${{ matrix.os.version }}" = "13" ]; then
               apt-get install -y systemd-dev
             fi
+            # x86_64 架构安装 libquadmath0
+            if [ "$(uname -m)" = "x86_64" ]; then
+              apt-get install -y libquadmath0
+            fi
           elif command -v dnf >/dev/null 2>&1; then
             dnf makecache
             dnf install -y dnf-plugins-core
@@ -60,6 +64,10 @@ jobs:
             dnf install -y bash curl-minimal wget zip unzip tar p7zip p7zip-plugins git jq git-core dos2unix make sudo systemd
             dnf groupinstall "Development Tools" -y
             dnf install -y cmake doxygen graphviz bison ncurses-devel libtirpc-devel openssl-devel pkg-config systemd-devel openldap-devel libudev-devel cyrus-sasl-devel cyrus-sasl-scram patchelf rpcgen rpcsvc-proto-devel krb5-devel zlib-devel readline-devel libcurl-devel libatomic
+            # x86_64 架构安装 libquadmath-devel
+            if [ "$(uname -m)" = "x86_64" ]; then
+              dnf install -y libquadmath-devel
+            fi
           fi
       - name: Build MySQL
         run: |
