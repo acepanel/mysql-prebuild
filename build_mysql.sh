@@ -71,7 +71,9 @@ rm -rf ${mysql_path}/bin/mysql_client_test*
 rm -rf ${mysql_path}/bin/mysqltest*
 rm -rf ${mysql_path}/bin/mysql_embedded
 
-# strip 二进制文件
+# 精简压缩
 strip -s ${mysql_path}/bin/*
+upx --best --lzma ${mysql_path}/bin/*
 
-echo "Installation successful"
+echo "Build successful"
+exit 0
