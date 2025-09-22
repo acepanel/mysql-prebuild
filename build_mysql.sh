@@ -4,13 +4,15 @@ channel=${1}
 version=${2}
 mysql_path="/opt/ace/server/mysql"
 
+echo "Building Percona Server ${version} for channel ${channel}"
+
 # 准备目录
 rm -rf ${mysql_path}
 mkdir -p ${mysql_path}
 cd ${mysql_path}
 
 # 下载源码
-git clone --depth 1 --branch "Percona-Server-8.4.6-6" https://github.com/percona/percona-server.git src
+git clone --depth 1 --branch "${version}" https://github.com/percona/percona-server.git src
 
 # 编译
 cd src
@@ -20,9 +22,11 @@ mkdir dist
 cd dist
 
 # 57 和 80 需要 boost 和禁用 TOKUDB
-if [[ ${channel} == "percona_57" ]] || [[ ${channel} == "percona_80" ]]; then
-    WITH_BOOST="-DDOWNLOAD_BOOST=1"
-    WITHOUT_TOKUDB="-DWITH_TOKUDB=0"
+WITH_BOOST="-DDOWNLOAD_BOOST=1"
+WITHOUT_TOKUDB="-DWITH_TOKUDB=0"
+if [[ ${channel} == "percona_84" ]]; then
+    WITH_BOOST=""
+    WITHOUT_TOKUDB=""
 fi
 
 # 80+ 禁用 MYSQLX 和 ROUTER
