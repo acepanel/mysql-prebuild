@@ -70,7 +70,7 @@ jobs:
       - name: Build MySQL
         run: |
           chmod +x build_mysql.sh
-          ./build_mysql.sh "${{ matrix.mysql.channel }}" "${{ env.mysql.version }}"
+          ./build_mysql.sh "${{ matrix.mysql.channel }}" "${{ matrix.mysql.version }}"
       - name: Package MySQL
         id: package
         run: |
