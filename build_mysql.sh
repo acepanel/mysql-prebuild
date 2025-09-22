@@ -70,6 +70,9 @@ fi
 cd ${mysql_path}
 rm -rf src
 rm -rf ${mysql_path}/lib/*.a
+rm -rf ${mysql_path}/bin/ldb
+rm -rf ${mysql_path}/bin/mysql_ldb
+rm -rf ${mysql_path}/bin/sst_dump
 rm -rf ${mysql_path}/bin/mysql_client_test*
 rm -rf ${mysql_path}/bin/mysqltest*
 rm -rf ${mysql_path}/bin/mysql_embedded
