@@ -22,7 +22,7 @@ mkdir dist
 cd dist
 
 # 57 和 80 需要 boost 和禁用 TOKUDB
-WITH_BOOST="-DDOWNLOAD_BOOST=1"
+WITH_BOOST="-DDOWNLOAD_BOOST=1 -DWITH_BOOST=${mysql_path}/src/boost"
 WITHOUT_TOKUDB="-DWITH_TOKUDB=0"
 if [[ ${channel} == "percona_84" ]]; then
     WITH_BOOST=""
