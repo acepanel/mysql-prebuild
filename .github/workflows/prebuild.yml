@@ -76,7 +76,7 @@ jobs:
           OS_NAME="${{ matrix.os.name }}"
           OS_VERSION="${{ matrix.os.version }}"
           PACKAGE_NAME="percona-server-${{ matrix.mysql.version }}-${OS_NAME}${OS_VERSION}-${ARCH}"
-          mv percona-server-*.7z "${PACKAGE_NAME}.7z"
+          mv /opt/ace/server/mysql/percona-server-*.7z "${PACKAGE_NAME}.7z"
           echo "name=${PACKAGE_NAME}" >> $GITHUB_OUTPUT
           echo "file=${PACKAGE_NAME}.7z" >> $GITHUB_OUTPUT
       - name: Upload build artifact
