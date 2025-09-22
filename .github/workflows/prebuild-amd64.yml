@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    name: Build MySQL ${{ matrix.mysql.channel }} ${{ matrix.mysql.version }} on ${{ matrix.os.name }} ${{ matrix.os.version }}
+    name: Build MySQL ${{ matrix.mysql.version }} on ${{ matrix.os.name }} ${{ matrix.os.version }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -55,11 +55,14 @@ jobs:
           elif command -v dnf >/dev/null 2>&1; then
             dnf update -y
             dnf install -y dnf-plugins-core
-            dnf config-manager --set-enabled powertools || true
-            dnf config-manager --set-enabled crb || true
-            /usr/bin/crb enable >/dev/null 2>&1
+            if [ "${{ matrix.os.version }}" = "8" ]; then
+              dnf config-manager --set-enabled powertools
+            else
+              dnf config-manager --set-enabled crb
+              /usr/bin/crb enable >/dev/null 2>&1
+            fi
             dnf install -y epel-release
-            dnf config-manager --set-enabled epel || true
+            dnf config-manager --set-enabled epel
             dnf install -y bash curl wget zip unzip tar p7zip p7zip-plugins git jq git-core dos2unix make sudo
             dnf groupinstall "Development Tools" -y
             dnf install -y cmake bison ncurses-devel libtirpc-devel openssl-devel pkg-config systemd-devel openldap-devel libudev-devel cyrus-sasl-devel cyrus-sasl-scram patchelf rpcgen rpcsvc-proto-devel krb5-devel zlib-devel readline-devel libcurl-devel libatomic gcc-gfortran
@@ -67,7 +70,7 @@ jobs:
       - name: Build MySQL
         run: |
           chmod +x build_mysql.sh
-          ./build_mysql.sh "${{ matrix.mysql.channel }}" "${{ env.MYSQL_VERSION }}"
+          ./build_mysql.sh "${{ matrix.mysql.channel }}" "${{ env.mysql.version }}"
       - name: Package MySQL
         id: package
         run: |
