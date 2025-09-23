@@ -93,8 +93,9 @@ jobs:
           find artifacts -name "*.7z" -exec cp {} release/ \;
           ls -la release/
       - name: Create Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
+          tag_name: "#${{ github.run_number }}"
           name: "#${{ github.run_number }}"
           files: release/*
         env:
