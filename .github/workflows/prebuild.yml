@@ -75,7 +75,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.package.outputs.name }}
-          path: /opt/ace/server/mysql/${{ steps.package.outputs.name }}.7z
+          path: ${{ steps.package.outputs.name }}.7z
           compression-level: 0
           retention-days: 90
   create-release:
