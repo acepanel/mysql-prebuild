@@ -77,4 +77,5 @@ jobs:
         with:
           name: ${{ steps.package.outputs.name }}
           path: /opt/ace/server/mysql
+          compression-level: 9
           retention-days: 90
