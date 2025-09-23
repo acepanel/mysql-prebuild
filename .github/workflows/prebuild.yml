@@ -71,11 +71,33 @@ jobs:
           OS_NAME="${{ matrix.os.name }}"
           OS_VERSION="${{ matrix.os.version }}"
           PACKAGE_NAME="percona-server-${{ matrix.mysql.version }}-${OS_NAME}${OS_VERSION}-${ARCH}"
+          mv /opt/ace/server/mysql/percona-server-*.7z "${PACKAGE_NAME}.7z"
           echo "name=${PACKAGE_NAME}" >> $GITHUB_OUTPUT
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.package.outputs.name }}
-          path: /opt/ace/server/mysql
-          compression-level: 9
+          path: /opt/ace/server/mysql/${{ steps.package.outputs.name }}.7z
+          compression-level: 0
           retention-days: 90
+  create-release:
+    name: Create Release
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+      - name: Prepare release assets
+        run: |
+          mkdir -p release
+          find artifacts -name "*.7z" -exec cp {} release/ \;
+          ls -la release/
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: "#${{ github.run_number }}"
+          files: release/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

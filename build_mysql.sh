@@ -73,6 +73,12 @@ rm -rf ${mysql_path}/bin/mysql_embedded
 
 # 精简压缩
 strip -s ${mysql_path}/bin/*
+7z a -m0=lzma2 -ms=on -mx=9 "percona-server-${version}.7z" *
+if [ "$?" != "0" ]; then
+    rm -rf ${mysql_path}
+    echo "Packaging failed"
+    exit 1
+fi
 
 echo "Build successful"
 exit 0
