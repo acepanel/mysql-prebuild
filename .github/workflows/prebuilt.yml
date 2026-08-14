@@ -19,11 +19,12 @@ jobs:
           - { channel: "mariadb", slug: "123", version: "12.3.2" }
           - { channel: "mysql", slug: "57", version: "5.7.44" }
           - { channel: "mysql", slug: "80", version: "8.0.46" }
-          - { channel: "mysql", slug: "84", version: "8.4.10" }
-          - { channel: "mysql", slug: "97", version: "9.7.1" }
+          - { channel: "mysql", slug: "84", version: "8.4.11" }
+          - { channel: "mysql", slug: "97", version: "9.7.2" }
           - { channel: "percona", slug: "57", version: "5.7.44-57" }
           - { channel: "percona", slug: "80", version: "8.0.46-37" }
           - { channel: "percona", slug: "84", version: "8.4.10-10" }
+          - { channel: "percona", slug: "97", version: "9.7.1-1" }
         os:
           # Debian
           - { name: "debian", version: "12", image: "debian:12" }
